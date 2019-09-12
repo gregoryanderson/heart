@@ -10,7 +10,7 @@ export const Wall = ({ handleFavorite, paintings }) => {
         url={painting.url}
         key={painting.id}
         id={painting.id}
-        width="500"
+        width="700"
         alt={painting.title}
         isFav={painting.isFav}
         handleFavorite={handleFavorite}
