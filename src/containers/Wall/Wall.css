@@ -1,6 +1,4 @@
 .Wall {
     columns: 3;
-    padding: 1em;
-    /* display: flex; */
-    /* justify-content: space-around; */
+    padding: 3em;
 }

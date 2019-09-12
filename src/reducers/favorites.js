@@ -1,5 +1,4 @@
 export const favoritesReducer = (state=[], action) => {
-    console.log('action', action)
     switch(action.type) {
         case 'ADD_FAVORITES':
           return [...state, action.data]
