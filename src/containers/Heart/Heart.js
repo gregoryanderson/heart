@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Heart.css";
 import { getPaintingsFromApiCalls } from "../../apiCalls/apiCalls.js";
-import { establishPaintingsInRedux, establishFavoritesInRedux } from '../../actions'
+import { establishPaintingsInRedux, addFavoriteInRedux, deleteFavoriteInRedux} from '../../actions'
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -31,8 +31,13 @@ class Heart extends Component {
     const foundPainting = this.props.paintings.find(painting => {
       return painting.id == artId
     })
-    foundPainting.isFav = !foundPainting.isFav
-    this.props.establishFavoritesInRedux(foundPainting)
+    if (!foundPainting.isFav){
+      foundPainting.isFav = !foundPainting.isFav
+      this.props.addFavoriteInRedux(foundPainting)
+    } else {
+      foundPainting.isFav = !foundPainting.isFav
+      this.props.deleteFavoriteInRedux(foundPainting)      
+    }
   }
 
 
@@ -53,7 +58,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   establishPaintingsInRedux: paintings => dispatch(establishPaintingsInRedux(paintings)),
-  establishFavoritesInRedux: favorites => dispatch(establishFavoritesInRedux(favorites))
+  addFavoriteInRedux: favorite => dispatch(addFavoriteInRedux(favorite)),
+  deleteFavoriteInRedux: favorite => dispatch(deleteFavoriteInRedux(favorite))
 })
 
 

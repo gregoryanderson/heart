@@ -3,7 +3,12 @@ export const establishPaintingsInRedux = paintings => ({
     paintings
 })
 
-export const establishFavoritesInRedux = data => ({
-    type: 'ESTABLISH_FAVORITES',
+export const addFavoriteInRedux = data => ({
+    type: 'ADD_FAVORITES',
+    data
+})
+
+export const deleteFavoriteInRedux = data => ({
+    type: 'DELETE_FAVORITES',
     data
 })
