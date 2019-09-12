@@ -1,6 +1,7 @@
 .Nav {
     display: flex;
-    justify-content: space-around
+    justify-content: space-around;
+    margin: 0 220px;
 }
 
 h1 {
@@ -12,4 +13,14 @@ h1 {
 .nav--art {
     color: #AB0000;
     font-weight: 700;
+}
+
+.logo {
+    margin-top: 40px;
+    font-size: 100px
+}
+
+.nav--links,
+.search {
+    margin-top: 120px;
 }

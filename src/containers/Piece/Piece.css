@@ -26,7 +26,6 @@
   box-shadow: inset -1px 1px 6px 1px rgba(0, 0, 0, 0.24);
   background: whitesmoke;
   align-items: center;
-  /* display: flex; */
   padding: 75px;
 }
 
@@ -35,7 +34,7 @@ p {
 }
 
 .Piece {
-  margin: 75px;
+  margin-bottom: 75px;
   display: flex;
   justify-content: space-around;
   --blur: 2px;

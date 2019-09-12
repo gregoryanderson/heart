@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import SearchForm from "../SearchForm/SearchForm";
+import { FaHeart, FaRegHeart, FaQuestion } from "react-icons/fa";
+
 
 const Nav = () => {
   return (
@@ -12,8 +14,8 @@ const Nav = () => {
         <NavLink>Home</NavLink>
         <NavLink>Favorites</NavLink>
       </div>
-      <h1>he<span className="nav--art">Art</span></h1>
-      <SearchForm />
+      <h1 className="logo">sh<span className="nav--art">Art</span></h1>
+      <SearchForm className="search"/>
     </section>
   );
 };
