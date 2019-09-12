@@ -11,8 +11,8 @@ const Nav = () => {
   return (
     <section className="Nav">
       <div className="nav--links">
-        <NavLink>Home</NavLink>
-        <NavLink>Favorites</NavLink>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/favorites">Favorites</NavLink>
       </div>
       <h1 className="logo">sh<span className="nav--art">Art</span></h1>
       <SearchForm className="search"/>
