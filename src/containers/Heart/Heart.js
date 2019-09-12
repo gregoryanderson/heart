@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Heart.css";
 import { getPaintingsFromApiCalls } from "../../apiCalls/apiCalls.js";
-import { establishPaintingsInRedux } from '../../actions'
+import { establishPaintingsInRedux, establishFavoritesInRedux } from '../../actions'
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -20,22 +20,27 @@ class Heart extends Component {
   async componentDidMount() {
     try {
       const pieces = await getPaintingsFromApiCalls();
-      this.props.establishPaintingsInRedux(pieces.artObjects)
-      // this.setState({ paintings: pieces.artObjects });
+      this.props.establishPaintingsInRedux(pieces)
     } catch ({ message }) {
       this.setState({ error: message });
     }
-
-    // getPaintingsFromApiCalls()
-    //   .then(pieces => this.props.establishPaintingsInRedux(pieces))
-    //   .then(err => this.setState({error: err.message}))
   }
+
+
+  handleFavorite = (artId) => {
+    const foundPainting = this.props.paintings.find(painting => {
+      return painting.id == artId
+    })
+    foundPainting.isFav = !foundPainting.isFav
+    this.props.establishFavoritesInRedux(foundPainting)
+  }
+
 
   render() {
     return (
       <section>
         <Nav />
-        {!!this.props.paintings.length && <Wall paintings={this.props.paintings} />}
+        {!!this.props.paintings.length && <Wall paintings={this.props.paintings} handleFavorite={this.handleFavorite}/>}
       </section>
     );
   }
@@ -43,11 +48,12 @@ class Heart extends Component {
 
 const mapStateToProps = state => ({
   paintings: state.paintings,
-  // favorites: state.favorites
+  favorites: state.favorites
 });
 
 const mapDispatchToProps = dispatch => ({
   establishPaintingsInRedux: paintings => dispatch(establishPaintingsInRedux(paintings)),
+  establishFavoritesInRedux: favorites => dispatch(establishFavoritesInRedux(favorites))
 })
 
 

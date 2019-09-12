@@ -12,7 +12,7 @@ const Nav = () => {
         <NavLink>Home</NavLink>
         <NavLink>Favorites</NavLink>
       </div>
-      <h1>He<span className="nav--art">Art</span></h1>
+      <h1>he<span className="nav--art">Art</span></h1>
       <SearchForm />
     </section>
   );

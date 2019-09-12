@@ -1,13 +1,27 @@
 import "./Piece.css";
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-const Piece = props => {
+export const Piece = ({isFav, url, width, key, alt, id, handleFavorite}) => {
   return (
     <div className="Piece">
-      <img src={props.url} width={props.width} key={props.key} alt={props.alt}/>
+      <div className="frame">
+        <section className="favorite-icon">
+          <img
+            className={isFav ? "favorite" : "notFavorite"}
+            src={url}
+            width={width}
+            key={key}
+            alt={alt}
+            isFav={isFav}
+            onClick={() => handleFavorite(id)}
+          />
+        </section>
+      </div>
     </div>
   );
 };
+
 
 export default Piece;

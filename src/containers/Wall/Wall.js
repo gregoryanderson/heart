@@ -3,15 +3,18 @@ import "./Wall.css";
 import PropTypes from "prop-types";
 import Piece from "../Piece/Piece";
 
-export const Wall = props => {
-    console.log(props)
-  const pieces = props.paintings.map(painting => {
+export const Wall = ({ handleFavorite, paintings }) => {
+  console.log(handleFavorite)
+  const pieces = paintings.map(painting => {
     return (
       <Piece
-        url={painting.webImage.url}
-        key={painting.objectNumber}
+        url={painting.url}
+        key={painting.id}
+        id={painting.id}
         width="500"
         alt={painting.title}
+        isFav={painting.isFav}
+        handleFavorite={handleFavorite}
       />
     );
   });
