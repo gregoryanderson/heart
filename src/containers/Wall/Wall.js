@@ -4,17 +4,18 @@ import PropTypes from "prop-types";
 import Piece from "../Piece/Piece";
 
 export const Wall = props => {
-  console.log(props);
-
+    console.log(props)
   const pieces = props.paintings.map(painting => {
-    return <Piece url={painting.webImage.url} key={painting.objectNumber} />;
+    return (
+      <Piece
+        url={painting.webImage.url}
+        key={painting.objectNumber}
+        width="500"
+        alt={painting.title}
+      />
+    );
   });
-
-  if (props.paintings.length > 0) {
-    return <section className='Wall'>{pieces}</section>;
-  } else {
-    return <p>hi</p>;
-  }
+  return <section className="Wall">{pieces}</section>;
 };
 
 export default Wall;

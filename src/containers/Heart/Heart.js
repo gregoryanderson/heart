@@ -28,7 +28,7 @@ class Heart extends Component {
     return (
       <section>
         <Nav />
-        <Wall paintings={this.state.paintings} />
+        {!!this.state.paintings.length && <Wall paintings={this.state.paintings} />}
       </section>
     );
   }
