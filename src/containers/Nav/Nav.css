@@ -1,0 +1,14 @@
+.Nav {
+    display: flex;
+    justify-content: space-around
+}
+
+h1 {
+    font-size: 3em;
+    font-weight:400;
+    margin: 0;
+}
+
+.nav--art {
+    color: #AB0000;
+}

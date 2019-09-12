@@ -1,4 +1,4 @@
 .Wall {
-    columns: 3 200px;
-    column-gap: 1rem;
+    columns: 3;
+    padding: 3em;
 }
