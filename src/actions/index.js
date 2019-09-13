@@ -12,3 +12,8 @@ export const deleteFavoriteInRedux = data => ({
     type: 'DELETE_FAVORITES',
     data
 })
+
+export const establishFacetsInRedux = facets => ({
+    type: 'ESTABLISH_FACETS',
+    facets
+})

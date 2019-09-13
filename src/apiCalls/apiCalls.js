@@ -111,7 +111,28 @@ export const cleanPaintingData = data => {
   });
 };
 
-export const getFacets = 
+export const getFacetsFromApiCalls = data => {
+    const url =
+      "https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&ps=10";
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("There was an error curating you gallery");
+        }
+        return response.json();
+      })
+      .then(data => cleanFacetData(data));
+}
+
+export const cleanFacetData= (data) => {
+  console.log('facet', data)
+  return data.facets.map(facet => {
+    return {
+      facets: facet.facets,
+      name: facet.name
+    }
+  })
+}
 //   hasImage: true
 // headerImage: {guid: "36b54f3a-46a6-4c24-b804-ce2b5b86f45a", offsetPercentageX: 0, offsetPercentageY: 0, width: 1920, height: 460, …}
 // id: "en-SK-A-4100"

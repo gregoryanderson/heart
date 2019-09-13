@@ -8,12 +8,14 @@ import {
   getSearchedForPaintingsByCentury,
   getSearchedForPaintingsByPlace,
   getSearchedForPaintingsByType,
-  getSearchedForPaintingsByTechnique
+  getSearchedForPaintingsByTechnique,
+  getFacetsFromApiCalls
 } from "../../apiCalls/apiCalls.js";
 import {
   establishPaintingsInRedux,
   addFavoriteInRedux,
-  deleteFavoriteInRedux
+  deleteFavoriteInRedux,
+  establishFacetsInRedux
 } from "../../actions";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -28,7 +30,7 @@ class Heart extends Component {
     super(props);
     this.state = {
       paintings: [],
-      error: ""
+      error: "",
     };
   }
 
@@ -41,7 +43,7 @@ class Heart extends Component {
     }
 
     try {
-      const facets = await getFacets();
+      const facets = await getFacetsFromApiCalls();
       this.props.establishFacetsInRedux(facets)
     } catch ({message}){
       this.setState({ error: message})
@@ -300,8 +302,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  establishPaintingsInRedux: paintings =>
-    dispatch(establishPaintingsInRedux(paintings)),
+  establishPaintingsInRedux: paintings => dispatch(establishPaintingsInRedux(paintings)),
   establishFacetsInRedux: facets => dispatch(establishFacetsInRedux(facets)),
   addFavoriteInRedux: favorite => dispatch(addFavoriteInRedux(favorite)),
   deleteFavoriteInRedux: favorite => dispatch(deleteFavoriteInRedux(favorite))
