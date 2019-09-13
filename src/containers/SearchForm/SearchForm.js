@@ -9,6 +9,7 @@ import {
 import { connect } from "react-redux";
 import Wall from "../Wall/Wall";
 import { Link } from "react-router-dom";
+import FacetContainer from '../FacetContainer/FacetContainer'
 
 class SearchForm extends Component {
   constructor(props) {
@@ -22,9 +23,12 @@ class SearchForm extends Component {
     this.setState({ currentValue: e.target.value });
   };
 
+
   render() {
+    console.log(this.props)
     return (
       <section>
+        <FacetContainer handleSearch={this.props.handleSearch} name={this.props.name} facets={this.props.facets}/>
         <form>
           <input
             type="text"
@@ -34,9 +38,8 @@ class SearchForm extends Component {
             value={this.state.name}
             onChange={e => this.handleChangeOfInput(e)}
           ></input>
-          <Link to={`/artist/${this.state.currentValue}`} onClick={e =>
+          <Link to={`/${this.props.name}/${this.state.currentValue}`} onClick={e =>
                 this.props.handleSearch(
-                  e,
                   this.props.name,
                   this.state.currentValue
                 )

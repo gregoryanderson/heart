@@ -23,7 +23,6 @@ const Nav = (props) => {
         <NavLink to="/technique">Technique</NavLink>
       </div>
       <h1 className="logo">sh<span className="nav--art">Art</span></h1>
-      <SearchForm className="search" handleSearch={props.handleSearch}/>
     </section>
   );
 };

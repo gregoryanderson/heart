@@ -63,7 +63,7 @@ class Heart extends Component {
     }
   };
 
-  handleSearch = async (e, type, input) => {
+  handleSearch = async (type, input) => {
     console.log(type);
     console.log(input);
     if (type === "color") {
@@ -124,6 +124,7 @@ class Heart extends Component {
                 name="artist"
                 handleSearch={this.handleSearch}
                 placeholder="Please search for an artist"
+                facets={this.props.facets[0]}
               />
             )}
           />
@@ -146,6 +147,7 @@ class Heart extends Component {
                 name="medium"
                 handleSearch={this.handleSearch}
                 placeholder="Please search for a medium"
+                facets={this.props.facets[4]}
               />
             )}
           />
@@ -168,6 +170,7 @@ class Heart extends Component {
                 name="color"
                 handleSearch={this.handleSearch}
                 placeholder="Please search for a color"
+                facets={this.props.facets[6]}
               />
             )}
           />
@@ -190,6 +193,7 @@ class Heart extends Component {
                 name="century"
                 handleSearch={this.handleSearch}
                 placeholder="Please search for a century"
+                facets={this.props.facets[2]}
               />
             )}
           />
@@ -212,6 +216,7 @@ class Heart extends Component {
                 name="type"
                 handleSearch={this.handleSearch}
                 placeholder="Please search for a type"
+                facets={this.props.facets[1]}
               />
             )}
           />
@@ -234,6 +239,7 @@ class Heart extends Component {
                 name="place"
                 handleSearch={this.handleSearch}
                 placeholder="Please search for a place"
+                facets={this.props.facets[3]}
               />
             )}
           />
@@ -256,6 +262,7 @@ class Heart extends Component {
                 name="technique"
                 handleSearch={this.handleSearch}
                 placeholder="Please search for a technique"
+                facets={this.props.facets[5]}
               />
             )}
           />
@@ -298,7 +305,8 @@ class Heart extends Component {
 
 const mapStateToProps = state => ({
   paintings: state.paintings,
-  favorites: state.favorites
+  favorites: state.favorites,
+  facets: state.facets
 });
 
 const mapDispatchToProps = dispatch => ({
