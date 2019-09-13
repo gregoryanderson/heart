@@ -11,7 +11,7 @@ export const Wall = ({ handleFavorite, paintings }) => {
         key={painting.id}
         id={painting.id}
         width="700"
-        alt={painting.title}
+        alt='Dutch Painting'
         isFav={painting.isFav}
         handleFavorite={handleFavorite}
       />

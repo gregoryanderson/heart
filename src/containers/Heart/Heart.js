@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Wall from "../Wall/Wall";
 import Nav from "../Nav/Nav";
+import Piece from '../Piece/Piece'
 
 class Heart extends Component {
   constructor(props) {
@@ -45,29 +46,55 @@ class Heart extends Component {
 
   render() {
     return (
-      <section>
-        <Nav />
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <Wall
-              paintings={this.props.paintings}
-              handleFavorite={this.handleFavorite}
-            />
-          )}
-        />
-        <Route
-          exact
-          path="/favorites"
-          render={() => (
-            <Wall
-              paintings={this.props.favorites}
-              handleFavorite={this.handleFavorite}
-            />
-          )}
-        />
-      </section>
+      <main>
+        <section>
+          <Nav />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Wall
+                paintings={this.props.paintings}
+                handleFavorite={this.handleFavorite}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/favorites"
+            render={() => (
+              <Wall
+                paintings={this.props.favorites}
+                handleFavorite={this.handleFavorite}
+              />
+            )}
+          />
+        </section>
+        <section className="selected__section">
+          <Route
+            path="/paintings/:id"
+            render={({ match }) => {
+              const foundPainting = this.props.paintings.find(
+                painting => painting.id === match.params.id
+              );
+              console.log(foundPainting)
+              return (
+                <Piece
+                  url={foundPainting.url}
+                  key={foundPainting.id}
+                  id={foundPainting.id}
+                  width="1000"
+                  alt={foundPainting.title}
+                  isFav={foundPainting.isFav}
+                  handleFavorite={this.handleFavorite}
+                  title={foundPainting.title}
+                  artist={foundPainting.artist}
+                />
+              );
+            }}
+          />
+        </section>
+      </main>
     );
   }
 }

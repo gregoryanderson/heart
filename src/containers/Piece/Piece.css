@@ -44,3 +44,7 @@ p {
   display: flex;
   justify-content: space-between;
 }
+
+img {
+  border: 1px solid black;
+}

@@ -1,6 +1,6 @@
 export const getPaintingsFromApiCalls = () => {
   const url =
-    "https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&f.normalized32Colors.hex=%20%23000000";
+    "https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&ps=10";
   return fetch(url)
     .then(response => {
       if (!response.ok) {
