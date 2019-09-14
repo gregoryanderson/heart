@@ -17,7 +17,7 @@ import {
   deleteFavoriteInRedux,
   establishFacetsInRedux
 } from "../../actions";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Wall from "../Wall/Wall";
@@ -68,8 +68,8 @@ export class Heart extends Component {
     // console.log(input);
     if (type === "color") {
       if (input.includes("#")) {
-        input.slice(2)
-        console.log(input)
+        input.slice(2);
+        console.log(input);
         const pieces = await getSearchedForPaintingsByColor(input);
         this.props.establishPaintingsInRedux(pieces);
       } else {
@@ -101,7 +101,23 @@ export class Heart extends Component {
     return (
       <main>
         <section>
-          <Nav handleSearch={this.handleSearch} />
+          <section className="Nav">
+            <div className="nav--links">
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/favorites">Art that you heArt</NavLink>
+              <p>or search by...</p>
+              <NavLink to="/artist">Artist</NavLink>
+              <NavLink to="/color">Color</NavLink>
+              <NavLink to="/medium">Medium</NavLink>
+              <NavLink to="/century">Century</NavLink>
+              <NavLink to="/type">Type</NavLink>
+              <NavLink to="/place">Place</NavLink>
+              <NavLink to="/technique">Technique</NavLink>
+            </div>
+            <h1 className="logo">
+              sh<span className="nav--art">Art</span>
+            </h1>
+          </section>
           <Route
             exact
             path="/"

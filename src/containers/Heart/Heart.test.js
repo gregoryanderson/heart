@@ -151,4 +151,22 @@ describe("Heart Routes", () => {
     expect(wrapper.find(FavoritesContainer)).toHaveLength(0);
     expect(wrapper.find(WelcomeContainer)).toHaveLength(0);
   });
+
+  describe("Heart Routes", () => {
+    it.skip("go to the wall component when favorites is called", () => {
+      const mockFacets = [
+        {
+          0: {}
+        }
+      ];
+      const wrapper = mount(
+        <MemoryRouter initialEntries={["/artist"]}>
+          <Heart facets={mockFacets}/>
+        </MemoryRouter>
+      );
+      console.log(wrapper);
+      expect(wrapper.find(SearchForm)).toHaveLength(1);
+      // expect(wrapper.find(CreatureDetails)).toHaveLength(0);
+    });
+  });
 });

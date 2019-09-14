@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Piece should match the snapshot 1`] = `
+<div
+  className="Piece"
+>
+  <div
+    className="frame"
+  >
+    <section
+      className="inlay"
+    >
+      <img
+        alt="Dutch Painting"
+        className="favorite"
+        isFav={true}
+        onClick={[Function]}
+        src="www.com.com"
+        width="700"
+      />
+      <div
+        className="bottom-icons"
+      >
+        <p>
+          <FaHeart />
+        </p>
+        <Link
+          to="/paintings/12345"
+        >
+          <p>
+            <FaQuestion />
+          </p>
+        </Link>
+      </div>
+    </section>
+  </div>
+</div>
+`;

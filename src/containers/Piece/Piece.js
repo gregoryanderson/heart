@@ -17,7 +17,6 @@ export const Piece = ({
   artist,
   route
 }) => {
-  console.log(route)
   return (
     <div className="Piece">
       <div className="frame">

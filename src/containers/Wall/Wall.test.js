@@ -7,11 +7,10 @@ describe("Wall", () => {
 
   beforeEach(() => {
     wrapper = shallow(
-      <Wall paintings={[]} handleFavorite={jest.jn()} route="artist" />
+      <Wall paintings={[]} handleFavorite={jest.fn()} route="artist" />
     );
-
-    it("should match the snapshot", () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+  });
+  it("should match the snapshot", () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

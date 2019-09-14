@@ -7,7 +7,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import { FaHeart, FaRegHeart, FaQuestion } from "react-icons/fa";
 
 
-const Nav = (props) => {
+export const Nav = (props) => {
   return (
     <section className="Nav">
       <div className="nav--links">
