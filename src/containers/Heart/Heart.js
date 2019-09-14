@@ -25,7 +25,7 @@ import Nav from "../Nav/Nav";
 import Piece from "../Piece/Piece";
 import SearchForm from "../SearchForm/SearchForm";
 
-class Heart extends Component {
+export class Heart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -319,7 +319,7 @@ class Heart extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   paintings: state.paintings,
   favorites: state.favorites,
   facets: state.facets
