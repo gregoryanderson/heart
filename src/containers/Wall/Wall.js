@@ -3,7 +3,8 @@ import "./Wall.css";
 import PropTypes from "prop-types";
 import Piece from "../Piece/Piece";
 
-export const Wall = ({ handleFavorite, paintings }) => {
+export const Wall = ({ handleFavorite, paintings, route }) => {
+  console.log('wall', route)
   const pieces = paintings.map(painting => {
     return (
       <Piece
@@ -14,6 +15,7 @@ export const Wall = ({ handleFavorite, paintings }) => {
         alt='Dutch Painting'
         isFav={painting.isFav}
         handleFavorite={handleFavorite}
+        route={route}
       />
     );
   });

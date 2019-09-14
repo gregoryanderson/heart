@@ -12,8 +12,8 @@ export const getPaintingsFromApiCalls = () => {
 };
 
 export const getSearchedForPaintingsByColor = input => {
-  console.log("in color");
   const url = `https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&f.normalized32Colors.hex=%20%23${input}`;
+  console.log(url)
   return fetch(url)
     .then(response => {
       if (!response.ok) {

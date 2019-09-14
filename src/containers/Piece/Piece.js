@@ -5,13 +5,30 @@ import { connect } from "react-redux";
 import { FaHeart, FaRegHeart, FaQuestion } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export const Piece = ({ isFav, url, width, key, alt, id, handleFavorite, title, artist }) => {
+export const Piece = ({
+  isFav,
+  url,
+  width,
+  key,
+  alt,
+  id,
+  handleFavorite,
+  title,
+  artist,
+  route
+}) => {
+  console.log(route)
   return (
     <div className="Piece">
       <div className="frame">
         <section className="inlay">
           {title && <h2>{title}</h2>}
           {artist && <h3>{artist}</h3>}
+          {title && (
+            <Link to={"/"} className="back-btn">
+              ◀ back
+            </Link>
+          )}
           <img
             className={isFav ? "favorite" : "notFavorite"}
             src={url}

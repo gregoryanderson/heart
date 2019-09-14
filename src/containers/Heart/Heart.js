@@ -30,7 +30,7 @@ class Heart extends Component {
     super(props);
     this.state = {
       paintings: [],
-      error: "",
+      error: ""
     };
   }
 
@@ -44,9 +44,9 @@ class Heart extends Component {
 
     try {
       const facets = await getFacetsFromApiCalls();
-      this.props.establishFacetsInRedux(facets)
-    } catch ({message}){
-      this.setState({ error: message})
+      this.props.establishFacetsInRedux(facets);
+    } catch ({ message }) {
+      this.setState({ error: message });
     }
   }
 
@@ -64,11 +64,18 @@ class Heart extends Component {
   };
 
   handleSearch = async (type, input) => {
-    console.log(type);
-    console.log(input);
+    // console.log(type);
+    // console.log(input);
     if (type === "color") {
-      const pieces = await getSearchedForPaintingsByColor(input);
-      this.props.establishPaintingsInRedux(pieces);
+      if (input.includes("#")) {
+        input.slice(2)
+        console.log(input)
+        const pieces = await getSearchedForPaintingsByColor(input);
+        this.props.establishPaintingsInRedux(pieces);
+      } else {
+        const pieces = await getSearchedForPaintingsByColor(input);
+        this.props.establishPaintingsInRedux(pieces);
+      }
     } else if (type === "medium") {
       const pieces = await getSearchedForPaintingsByMedium(input);
       this.props.establishPaintingsInRedux(pieces);
@@ -102,6 +109,7 @@ class Heart extends Component {
               <Wall
                 paintings={this.props.paintings}
                 handleFavorite={this.handleFavorite}
+                route=""
               />
             )}
           />
@@ -112,6 +120,7 @@ class Heart extends Component {
               <Wall
                 paintings={this.props.favorites}
                 handleFavorite={this.handleFavorite}
+                route="favorites"
               />
             )}
           />
@@ -130,11 +139,12 @@ class Heart extends Component {
           />
           <Route
             exact
-            path="/artist/:name"
+            path="/artist/:artist"
             render={() => (
               <Wall
                 paintings={this.props.paintings}
                 handleFavorite={this.handleFavorite}
+                route="artist"
               />
             )}
           />
@@ -158,6 +168,7 @@ class Heart extends Component {
               <Wall
                 paintings={this.props.paintings}
                 handleFavorite={this.handleFavorite}
+                route="medium"
               />
             )}
           />
@@ -181,6 +192,7 @@ class Heart extends Component {
               <Wall
                 paintings={this.props.paintings}
                 handleFavorite={this.handleFavorite}
+                route="color"
               />
             )}
           />
@@ -204,6 +216,7 @@ class Heart extends Component {
               <Wall
                 paintings={this.props.paintings}
                 handleFavorite={this.handleFavorite}
+                route="century"
               />
             )}
           />
@@ -227,6 +240,7 @@ class Heart extends Component {
               <Wall
                 paintings={this.props.paintings}
                 handleFavorite={this.handleFavorite}
+                route="type"
               />
             )}
           />
@@ -250,6 +264,7 @@ class Heart extends Component {
               <Wall
                 paintings={this.props.paintings}
                 handleFavorite={this.handleFavorite}
+                route="place"
               />
             )}
           />
@@ -273,6 +288,7 @@ class Heart extends Component {
               <Wall
                 paintings={this.props.paintings}
                 handleFavorite={this.handleFavorite}
+                route="technique"
               />
             )}
           />
@@ -310,7 +326,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  establishPaintingsInRedux: paintings => dispatch(establishPaintingsInRedux(paintings)),
+  establishPaintingsInRedux: paintings =>
+    dispatch(establishPaintingsInRedux(paintings)),
   establishFacetsInRedux: facets => dispatch(establishFacetsInRedux(facets)),
   addFavoriteInRedux: favorite => dispatch(addFavoriteInRedux(favorite)),
   deleteFavoriteInRedux: favorite => dispatch(deleteFavoriteInRedux(favorite))
