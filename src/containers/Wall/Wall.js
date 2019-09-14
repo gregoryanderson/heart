@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Piece from "../Piece/Piece";
 
 export const Wall = ({ handleFavorite, paintings, route }) => {
-  console.log('wall', route)
   const pieces = paintings.map(painting => {
     return (
       <Piece
