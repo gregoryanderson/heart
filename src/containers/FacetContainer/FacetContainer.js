@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import FacetBtn from "../FacetBtn/FacetBtn";
 
 const FacetContainer = (props) => {
-    console.log('container', props)
   return props.facets.facets.map(facet => {
     return (
       <FacetBtn

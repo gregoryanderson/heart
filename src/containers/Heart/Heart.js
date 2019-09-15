@@ -64,11 +64,9 @@ export class Heart extends Component {
   };
 
   handleSearch = async (type, input) => {
-    // console.log(type);
-    // console.log(input);
     if (type === "color") {
       if (input.includes("#")) {
-        input.slice(2);
+        input = input.replace(/\s*#/g, "");
         console.log(input);
         const pieces = await getSearchedForPaintingsByColor(input);
         this.props.establishPaintingsInRedux(pieces);

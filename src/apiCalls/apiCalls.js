@@ -124,7 +124,6 @@ export const getFacetsFromApiCalls = data => {
 }
 
 export const cleanFacetData= (data) => {
-  console.log('facet', data)
   return data.facets.map(facet => {
     return {
       facets: facet.facets,

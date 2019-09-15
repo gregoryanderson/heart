@@ -34,7 +34,7 @@ p {
 }
 
 .Piece {
-  margin-bottom: 75px;
+  padding-bottom: 75px;
   display: flex;
   justify-content: space-around;
   --blur: 2px;
