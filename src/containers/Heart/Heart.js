@@ -35,6 +35,7 @@ export class Heart extends Component {
   }
 
   async componentDidMount() {
+
     try {
       const pieces = await getPaintingsFromApiCalls();
       this.props.establishPaintingsInRedux(pieces);
@@ -61,7 +62,17 @@ export class Heart extends Component {
       foundPainting.isFav = !foundPainting.isFav;
       this.props.deleteFavoriteInRedux(foundPainting);
     }
+    // this.saveToStorage(this.props.favorites)
   };
+
+  saveToStorage(favorites) {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
+
+  getFromStorage(){
+    const oldFavs = JSON.parse(localStorage.getItem('favorites'))
+    this.saveToStorage(oldFavs)
+  }
 
   handleSearch = async (type, input) => {
     if (type === "color") {
@@ -93,9 +104,14 @@ export class Heart extends Component {
       const pieces = await getSearchForPaintingsByArtist(input);
       this.props.establishPaintingsInRedux(pieces);
     }
+    
   };
 
   render() {
+    this.getFromStorage()
+    // this.saveToStorage()
+    console.log('local', localStorage)
+    console.log('favs', this.props.favorites)
     return (
       <main>
         <section>

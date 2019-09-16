@@ -1,6 +1,6 @@
 export const getPaintingsFromApiCalls = () => {
   const url =
-    "https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&ps=10";
+    "https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&q=van gogh&imgonly=true";
   return fetch(url)
     .then(response => {
       if (!response.ok) {
@@ -26,6 +26,7 @@ export const getSearchedForPaintingsByColor = input => {
 
 export const getSearchForPaintingsByArtist = input => {
   const url = `https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&q=${input}&imgonly=true`;
+  console.log(url)
   return fetch(url)
     .then(response => {
       if (!response.ok) {
