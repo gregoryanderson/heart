@@ -3,8 +3,8 @@ import "./FacetContainer.css";
 import PropTypes from "prop-types";
 import FacetBtn from "../FacetBtn/FacetBtn";
 
-const FacetContainer = (props) => {
-  return props.facets.facets.map(facet => {
+const FacetContainer = props => {
+  const buttons = props.facets.facets.map(facet => {
     return (
       <FacetBtn
         assignment={facet.key}
@@ -14,6 +14,7 @@ const FacetContainer = (props) => {
       />
     );
   });
+  return <section> {buttons} </section>;
 };
 
 export default FacetContainer;

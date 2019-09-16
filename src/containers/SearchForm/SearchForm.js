@@ -9,7 +9,7 @@ import {
 import { connect } from "react-redux";
 import Wall from "../Wall/Wall";
 import { Link } from "react-router-dom";
-import FacetContainer from '../FacetContainer/FacetContainer'
+import FacetContainer from "../FacetContainer/FacetContainer";
 
 class SearchForm extends Component {
   constructor(props) {
@@ -23,12 +23,17 @@ class SearchForm extends Component {
     this.setState({ currentValue: e.target.value });
   };
 
-
   render() {
-    console.log(this.props)
+    console.log('search', this.props);
     return (
-      <section>
-        <FacetContainer handleSearch={this.props.handleSearch} name={this.props.name} facets={this.props.facets}/>
+      <section className="SearchForm">
+        <p className="search-text">Please choose from one of these options:</p>
+        <FacetContainer
+          handleSearch={this.props.handleSearch}
+          name={this.props.name}
+          facets={this.props.facets}
+        />
+        <p className="search-text">Or ask for something more specific..</p>
         <form>
           <input
             type="text"
@@ -38,17 +43,20 @@ class SearchForm extends Component {
             value={this.state.name}
             onChange={e => this.handleChangeOfInput(e)}
           ></input>
-          <Link to={`/${this.props.name}/${this.state.currentValue}`} onClick={e =>
-                this.props.handleSearch(
-                  this.props.name,
-                  this.state.currentValue
-                )
-              }>
-            <p>
-              ..and find some paintings
-            </p>
+          <Link
+            to={`/${this.props.name}/${this.state.currentValue}`}
+            onClick={e =>
+              this.props.handleSearch(this.props.name, this.state.currentValue)
+            }
+          >
+            <p className="search-text">..and find some paintings</p>
           </Link>
         </form>
+        <Wall
+          paintings={this.props.paintings}
+          handleFavorite={this.handleFavorite}
+          route="favorites"
+        />
       </section>
     );
   }

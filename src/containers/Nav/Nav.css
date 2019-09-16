@@ -1,26 +1,30 @@
 .Nav {
-    display: flex;
-    justify-content: space-around;
-    margin: 0 220px;
-}
-
-h1 {
-    font-size: 3em;
-    font-weight:400;
-    margin: 0;
-}
-
-.nav--art {
-    color: #AB0000;
-    font-weight: 700;
+    text-align: center;
+    margin: 0 250px;
 }
 
 .logo {
-    margin-top: 40px;
-    font-size: 100px;
+    font-size: 50px;
+    margin: 0;
+    padding-top: 25px;
 }
 
-.nav--links,
-.search {
-    margin-top: 120px;
+.search-links {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px
+}
+
+.top-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px
+}
+
+.link {
+    margin: 0px 20px;
+}
+
+.nav--art {
+    color: #660000
 }

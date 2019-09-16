@@ -99,23 +99,7 @@ export class Heart extends Component {
     return (
       <main>
         <section>
-          <section className="Nav">
-            <div className="nav--links">
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/favorites">Art that you heArt</NavLink>
-              <p>or search by...</p>
-              <NavLink to="/artist">Artist</NavLink>
-              <NavLink to="/color">Color</NavLink>
-              <NavLink to="/medium">Medium</NavLink>
-              <NavLink to="/century">Century</NavLink>
-              <NavLink to="/type">Type</NavLink>
-              <NavLink to="/place">Place</NavLink>
-              <NavLink to="/technique">Technique</NavLink>
-            </div>
-            <h1 className="logo">
-              sh<span className="nav--art">Art</span>
-            </h1>
-          </section>
+          <Nav />
           <Route
             exact
             path="/"
