@@ -24,7 +24,7 @@ export const Nav = props => {
           </NavLink>
         </p>
       </div>
-      <p>please search by...</p>
+      <p className="please-text">please search by...</p>
       <div className="search-links">
         <p >
           <NavLink style={{ textDecoration: "none" }} to="/artist">

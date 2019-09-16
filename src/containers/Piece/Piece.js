@@ -2,8 +2,9 @@ import "./Piece.css";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { FaHeart, FaRegHeart, FaQuestion } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaQuestion, FaChevronLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import SearchForm from "../SearchForm/SearchForm";
 
 export const Piece = ({
   isFav,
@@ -21,13 +22,21 @@ export const Piece = ({
     <div className="Piece">
       <div className="frame">
         <section className="inlay">
-          {title && <h2>{title}</h2>}
-          {artist && <h3>{artist}</h3>}
-          {title && (
-            <Link to={"/"} className="back-btn">
-              ◀ back
-            </Link>
-          )}
+          <section className="selected">
+            {title && (
+              <Link
+                style={{ textDecoration: "none" }}
+                to={"/"}
+                className="back-btn"
+              >
+                <FaChevronLeft />
+              </Link>
+            )}
+            <section className="selected-title">
+              {title && <h2>{title}</h2>}
+              {artist && <h3>{artist}</h3>}
+            </section>
+          </section>
           <img
             className={isFav ? "favorite" : "notFavorite"}
             src={url}
@@ -38,7 +47,7 @@ export const Piece = ({
             onClick={() => handleFavorite(id)}
           />
           <div className="bottom-icons">
-            <p>{isFav ? <FaHeart /> : <FaRegHeart />}</p>
+            <p onClick={() => handleFavorite(id)}>{isFav ? <FaHeart /> : <FaRegHeart />}</p>
             <Link to={`/paintings/${id}`}>
               <p>
                 <FaQuestion />
