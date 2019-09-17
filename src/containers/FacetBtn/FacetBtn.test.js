@@ -10,9 +10,9 @@ describe("FacetBtn", () => {
 
     wrapper = shallow(
       <FacetBtn
-        assignment='artist'
+        assignment="artist"
         key={123}
-        name='Van Gogh'
+        name="Van Gogh"
         handleSearch={mockHandleSearch}
       />
     );

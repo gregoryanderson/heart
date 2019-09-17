@@ -18,4 +18,3 @@ describe("facets", () => {
     expect(result).toEqual(expected);
   });
 });
-

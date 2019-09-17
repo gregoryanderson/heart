@@ -8,7 +8,7 @@ export const FacetContainer = props => {
     return (
       <FacetBtn
         assignment={facet.key}
-        key={facet.value+facet.key}
+        key={facet.value + facet.key}
         name={props.name}
         handleSearch={props.handleSearch}
       />

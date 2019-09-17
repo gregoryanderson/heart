@@ -63,15 +63,14 @@ describe("Actions", () => {
       data
     };
     expect(deleteFavoriteInRedux(data)).toEqual(expectedAction);
-
   });
 
   it("should have a type of ESTABLISH_FACETS", () => {
     let facets = {
-        facets: {},
-        name: {}
-    }
-    
+      facets: {},
+      name: {}
+    };
+
     let expectedAction = {
       type: "ESTABLISH_FACETS",
       facets
