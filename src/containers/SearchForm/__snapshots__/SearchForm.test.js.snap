@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm should match the snapshot 1`] = `
+<section
+  className="SearchForm"
+>
+  <p
+    className="search-text"
+  >
+    Please choose from one of these options:
+  </p>
+  <FacetContainer
+    facets={
+      Object {
+        "facets": Array [
+          Object {
+            "0": Object {},
+            "1": Object {},
+          },
+        ],
+      }
+    }
+    handleSearch={[MockFunction]}
+  />
+  <p
+    className="search-text"
+  >
+    Or ask for something more specific..
+  </p>
+  <form>
+    <input
+      className="search"
+      onChange={[Function]}
+      type="text"
+    />
+    <Link
+      onClick={[Function]}
+      to="/undefined/null"
+    >
+      <p
+        className="search-text"
+      >
+        ..and find some paintings
+      </p>
+    </Link>
+  </form>
+  <Wall
+    handleFavorite={[MockFunction]}
+    paintings={
+      Array [
+        Object {
+          "artist": "anonymous",
+          "height": 2500,
+          "id": "en-NG-NM-7687",
+          "isFav": false,
+          "title": "Clock and gunpowder horn",
+          "url": "https://lh3.ggpht.com/lAJ1wnr_hEOncOfh9eKzvaS8w-fhLLq5yGlzHBctnjgyOzsbuP4cGIqP4q0A-YvnyXBhJi96il6NIZNhRVW-BVg2lW0=s0",
+          "width": 1672,
+        },
+      ]
+    }
+    route="favorites"
+  />
+</section>
+`;

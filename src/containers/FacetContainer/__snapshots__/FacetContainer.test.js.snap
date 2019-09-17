@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FacetContainer should  match the snapshot 1`] = `
+<section>
+   
+  <FacetBtn
+    handleSearch={[MockFunction]}
+    key="NaN"
+    name="color"
+  />
+   
+</section>
+`;

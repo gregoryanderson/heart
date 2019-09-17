@@ -23,7 +23,7 @@ describe("favorites", () => {
 
     let mockAction = {
       type: "DELETE_FAVORITES",
-      data: [{ title: "painting", id: 2 }]
+      data: { title: "painting", id: 2 }
     };
 
     let expected = [{ title: "painting", id: 1 }];

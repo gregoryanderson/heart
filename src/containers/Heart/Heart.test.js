@@ -1,16 +1,22 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import { Heart, mapStateToProps } from "./Heart";
+import { Heart, mapStateToProps, mapDispatchToProps } from "./Heart";
 import { MemoryRouter } from "react-router";
+import { establishPaintingsInRedux } from "../../actions";
 
 describe("Heart", () => {
-  let wrapper, mockHandleFavorite, mockHandleSearch, mockFavorites, mockFacets, mockPaintings;
+  let wrapper,
+    mockHandleFavorite,
+    mockHandleSearch,
+    mockFavorites,
+    mockFacets,
+    mockPaintings;
 
   beforeEach(() => {
-    const mockHandleFavorite = jest.fn();
-    const mockHandleSearch = jest.fn();
+    mockHandleFavorite = jest.fn();
+    mockHandleSearch = jest.fn();
 
-    const mockFavorites = [
+    mockFavorites = [
       {
         title: "Cupboard",
         id: "en-BK-1975-81",
@@ -22,12 +28,12 @@ describe("Heart", () => {
         isFav: false
       }
     ];
-    const mockFacets = [
+    mockFacets = [
       {
         0: {}
       }
     ];
-    const mockPaintings = [
+    mockPaintings = [
       {
         title: "Clock and gunpowder horn",
         id: "en-NG-NM-7687",
@@ -44,6 +50,9 @@ describe("Heart", () => {
       <Heart
         handleSearch={mockHandleSearch}
         handleFavorite={mockHandleFavorite}
+        paintings={mockPaintings}
+        favorites={mockFavorites}
+        facets={mockFacets}
       />
     );
   });
@@ -54,7 +63,7 @@ describe("Heart", () => {
 });
 
 describe("mapStateToProps", () => {
-  it('should properly map to props', () => {
+  it("should properly map to props", () => {
     const mockFavorites = [
       {
         title: "Cupboard",
@@ -116,11 +125,85 @@ describe("mapStateToProps", () => {
         }
       ]
     };
-  
+
     expect(mapStateToProps(mockState).paintings).toEqual(mockPaintings);
     expect(mapStateToProps(mockState).facets).toEqual(mockFacets);
     expect(mapStateToProps(mockState).favorites).toEqual(mockFavorites);
-  })
+  });
+});
+
+describe("mapDispatchToProps", () => {
+  it("should dispatch with paintings when establish paintings is called", () => {
+    let mockPainting = {
+      paintings:[
+        {
+          name: "painting",
+          id: 1
+        }
+      ] ,
+      type: "ESTABLISH_PAINTINGS"
+    };
+    let mockDispatch = jest.fn();
+
+    let actionToDispatch = establishPaintingsInRedux(mockPainting);
+    let mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.establishPaintingsInRedux(mockPainting);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it("should dispatch with facets when establish facets is called", () => {
+    let mockFacet = {
+      facets:[{
+        0:{}
+      }
+      ] ,
+      type: "ESTABLISH_FACETS"
+    };
+    let mockDispatch = jest.fn();
+
+    let actionToDispatch = establishPaintingsInRedux(mockFacet);
+    let mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.establishPaintingsInRedux(mockFacet);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it("should add favorite when add favorite is called", () => {
+    let mockPainting = {
+      paintings:[
+        {
+          name: "painting",
+          id: 1
+        }
+      ] ,
+      type: 'ADD_FAVORITE'
+    };
+    let mockDispatch = jest.fn();
+
+    let actionToDispatch = establishPaintingsInRedux(mockPainting);
+    let mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.establishPaintingsInRedux(mockPainting);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  let mockPainting = {
+    paintings:[
+      {
+        name: "painting",
+        id: 1
+      }
+    ] ,
+    type: 'DELETE_FAVORITE'
+  };
+  let mockDispatch = jest.fn();
+
+  let actionToDispatch = establishPaintingsInRedux(mockPainting);
+  let mappedProps = mapDispatchToProps(mockDispatch);
+  mappedProps.establishPaintingsInRedux(mockPainting);
+
+  expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
 });
 
 describe("Heart Routes", () => {
@@ -161,7 +244,7 @@ describe("Heart Routes", () => {
       ];
       const wrapper = mount(
         <MemoryRouter initialEntries={["/artist"]}>
-          <Heart facets={mockFacets}/>
+          <Heart facets={mockFacets} />
         </MemoryRouter>
       );
       console.log(wrapper);

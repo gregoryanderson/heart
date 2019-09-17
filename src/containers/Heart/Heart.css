@@ -2,3 +2,14 @@ main {
     background-image:linear-gradient(#aaa, #eee);
     /* height:100vh; */
   }
+
+.loading {
+  border: none;
+  height: 300px;
+}
+
+.loading-div {
+  /* display: flex; */
+  text-align: center;
+  padding-bottom: 500px
+}

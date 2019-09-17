@@ -2,10 +2,9 @@ import "./Nav.css";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-export const Nav = props => {
+export const Nav = () => {
   return (
     <section className="Nav">
       <h1 className="logo">
@@ -73,3 +72,13 @@ export const Nav = props => {
 };
 
 export default Nav;
+
+Nav.propTypes = {
+  addFavoriteInRedux: PropTypes.func,
+  deleteFavoriteInRedux: PropTypes.func,
+  establishFacetsInRedux: PropTypes.func,
+  establishPaintingsInRedux: PropTypes.func,
+  facets: PropTypes.array,
+  favorites: PropTypes.array,
+  paintings: PropTypes.array
+  };

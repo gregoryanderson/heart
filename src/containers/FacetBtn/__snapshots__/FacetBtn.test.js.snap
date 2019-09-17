@@ -6,6 +6,11 @@ exports[`FacetBtn should match the snapshot 1`] = `
 >
   <button
     onClick={[Function]}
+    style={
+      Object {
+        "backgroundColor": "artist",
+      }
+    }
   >
     artist
   </button>

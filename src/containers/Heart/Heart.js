@@ -17,25 +17,19 @@ import {
   deleteFavoriteInRedux,
   establishFacetsInRedux
 } from "../../actions";
-import { Route, Redirect, NavLink } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Wall from "../Wall/Wall";
 import Nav from "../Nav/Nav";
 import Piece from "../Piece/Piece";
 import SearchForm from "../SearchForm/SearchForm";
+import Spinner from '../../Images/Spinner.svg'
 
 export class Heart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      paintings: [],
-      error: ""
-    };
-  }
 
   async componentDidMount() {
-
+    this.getFromStorage()
     try {
       const pieces = await getPaintingsFromApiCalls();
       this.props.establishPaintingsInRedux(pieces);
@@ -49,11 +43,12 @@ export class Heart extends Component {
     } catch ({ message }) {
       this.setState({ error: message });
     }
+
   }
 
   handleFavorite = artId => {
     const foundPainting = this.props.paintings.find(painting => {
-      return painting.id == artId;
+      return painting.id === artId;
     });
     if (!foundPainting.isFav) {
       foundPainting.isFav = !foundPainting.isFav;
@@ -62,16 +57,18 @@ export class Heart extends Component {
       foundPainting.isFav = !foundPainting.isFav;
       this.props.deleteFavoriteInRedux(foundPainting);
     }
-    // this.saveToStorage(this.props.favorites)
+    this.saveToStorage(this.props.favorites)
   };
 
   saveToStorage(favorites) {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   }
 
-  getFromStorage(){
-    const oldFavs = JSON.parse(localStorage.getItem('favorites'))
-    this.saveToStorage(oldFavs)
+  getFromStorage() {
+    // console.log('in')
+    const oldFavs = JSON.parse(localStorage.getItem("favorites"));
+    // console.log('old', oldFavs)
+    this.saveToStorage(oldFavs);
   }
 
   handleSearch = async (type, input) => {
@@ -104,18 +101,15 @@ export class Heart extends Component {
       const pieces = await getSearchForPaintingsByArtist(input);
       this.props.establishPaintingsInRedux(pieces);
     }
-    
   };
 
   render() {
-    this.getFromStorage()
-    // this.saveToStorage()
-    console.log('local', localStorage)
-    console.log('favs', this.props.favorites)
     return (
       <main>
         <section>
           <Nav />
+          {this.props.error && <p>{this.props.error}</p>}
+          {!this.props.facets.length && <div className="loading-div"><img src={Spinner} alt='Loading frame' className="loading"/><p>Please wait while we curate your gallery..</p></div>}
           <Route
             exact
             path="/"
@@ -143,8 +137,8 @@ export class Heart extends Component {
             path="/artist"
             render={() => (
               <SearchForm
-                paintings={this.props.paintings}
                 name="artist"
+                handleFavorite={this.handleFavorite}
                 handleSearch={this.handleSearch}
                 placeholder="Please search for an artist"
                 facets={this.props.facets[0]}
@@ -167,8 +161,8 @@ export class Heart extends Component {
             path="/medium"
             render={() => (
               <SearchForm
-                paintings={this.props.paintings}
                 name="medium"
+                handleFavorite={this.handleFavorite}
                 handleSearch={this.handleSearch}
                 placeholder="Please search for a medium"
                 facets={this.props.facets[4]}
@@ -191,8 +185,8 @@ export class Heart extends Component {
             path="/color"
             render={() => (
               <SearchForm
-                paintings={this.props.paintings}
                 name="color"
+                handleFavorite={this.handleFavorite}
                 handleSearch={this.handleSearch}
                 placeholder="Please search for a color"
                 facets={this.props.facets[6]}
@@ -215,8 +209,8 @@ export class Heart extends Component {
             path="/century"
             render={() => (
               <SearchForm
-                paintings={this.props.paintings}
                 name="century"
+                handleFavorite={this.handleFavorite}
                 handleSearch={this.handleSearch}
                 placeholder="Please search for a century"
                 facets={this.props.facets[2]}
@@ -239,9 +233,9 @@ export class Heart extends Component {
             path="/type"
             render={() => (
               <SearchForm
-                paintings={this.props.paintings}
                 name="type"
                 handleSearch={this.handleSearch}
+                handleFavorite={this.handleFavorite}
                 placeholder="Please search for a type"
                 facets={this.props.facets[1]}
               />
@@ -263,9 +257,9 @@ export class Heart extends Component {
             path="/place"
             render={() => (
               <SearchForm
-                paintings={this.props.paintings}
                 name="place"
                 handleSearch={this.handleSearch}
+                handleFavorite={this.handleFavorite}
                 placeholder="Please search for a place"
                 facets={this.props.facets[3]}
               />
@@ -287,9 +281,9 @@ export class Heart extends Component {
             path="/technique"
             render={() => (
               <SearchForm
-                paintings={this.props.paintings}
                 name="technique"
                 handleSearch={this.handleSearch}
+                handleFavorite={this.handleFavorite}
                 placeholder="Please search for a technique"
                 facets={this.props.facets[5]}
               />
@@ -339,7 +333,7 @@ export const mapStateToProps = state => ({
   facets: state.facets
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   establishPaintingsInRedux: paintings =>
     dispatch(establishPaintingsInRedux(paintings)),
   establishFacetsInRedux: facets => dispatch(establishFacetsInRedux(facets)),
@@ -352,4 +346,12 @@ export default connect(
   mapDispatchToProps
 )(Heart);
 
-Heart.propTypes = {};
+Heart.propTypes = {
+addFavoriteInRedux: PropTypes.func,
+deleteFavoriteInRedux: PropTypes.func,
+establishFacetsInRedux: PropTypes.func,
+establishPaintingsInRedux: PropTypes.func,
+facets: PropTypes.array,
+favorites: PropTypes.array,
+paintings: PropTypes.array
+};

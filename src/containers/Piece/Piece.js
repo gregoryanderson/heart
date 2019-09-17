@@ -1,10 +1,8 @@
 import "./Piece.css";
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { FaHeart, FaRegHeart, FaQuestion, FaChevronLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import SearchForm from "../SearchForm/SearchForm";
 
 export const Piece = ({
   isFav,
@@ -16,7 +14,6 @@ export const Piece = ({
   handleFavorite,
   title,
   artist,
-  route
 }) => {
   return (
     <div className="Piece">
@@ -49,9 +46,9 @@ export const Piece = ({
           <div className="bottom-icons">
             <p onClick={() => handleFavorite(id)}>{isFav ? <FaHeart /> : <FaRegHeart />}</p>
             <Link to={`/paintings/${id}`}>
-              <p>
+              <h4>
                 <FaQuestion />
-              </p>
+              </h4>
             </Link>
           </div>
         </section>
@@ -61,3 +58,15 @@ export const Piece = ({
 };
 
 export default Piece;
+
+Piece.propTypes = {
+  isFav: PropTypes.bool,
+  url: PropTypes.string,
+  width: PropTypes.string,
+  key: PropTypes.string,
+  alt: PropTypes.string,
+  id: PropTypes.string,
+  handleFavorite: PropTypes.func,
+  title: PropTypes.string,
+  artist: PropTypes.string
+}

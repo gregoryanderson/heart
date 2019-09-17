@@ -26,13 +26,14 @@ describe("Piece", () => {
       expect(wrapper).toMatchSnapshot()
   })
 
-  it('should call handleFavorite when clicked', () => {
-
-    // const mockEvent = { preventDefault: jest.fn() }
-
+  it('should call handleFavorite when image is clicked', () => {
     wrapper.find('img').simulate('click')
+    expect(mockHandleFavorite).toHaveBeenCalledWith(12345);
+  });
 
-    expect(mockHandleFavorite).toHaveBeenCalled();
+  it('should call handleFavorite when heart is clicked', () => {
+    wrapper.find('p').simulate('click')
+    expect(mockHandleFavorite).toHaveBeenCalledWith(12345);
   });
 });
 

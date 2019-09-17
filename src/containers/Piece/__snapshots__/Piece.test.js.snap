@@ -10,6 +10,13 @@ exports[`Piece should match the snapshot 1`] = `
     <section
       className="inlay"
     >
+      <section
+        className="selected"
+      >
+        <section
+          className="selected-title"
+        />
+      </section>
       <img
         alt="Dutch Painting"
         className="favorite"
@@ -21,15 +28,17 @@ exports[`Piece should match the snapshot 1`] = `
       <div
         className="bottom-icons"
       >
-        <p>
+        <p
+          onClick={[Function]}
+        >
           <FaHeart />
         </p>
         <Link
           to="/paintings/12345"
         >
-          <p>
+          <h4>
             <FaQuestion />
-          </p>
+          </h4>
         </Link>
       </div>
     </section>

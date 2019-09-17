@@ -24,7 +24,6 @@ describe("FacetBtn", () => {
 
   it("should call handleSearch when clicked", () => {
     wrapper.find("button").simulate("click");
-
     expect(mockHandleSearch).toHaveBeenCalled();
   });
 });

@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import "./SearchForm.css";
 import PropTypes from "prop-types";
-import {
-  establishPaintingsInRedux,
-  addFavoriteInRedux,
-  deleteFavoriteInRedux
-} from "../../actions";
 import { connect } from "react-redux";
 import Wall from "../Wall/Wall";
 import { Link } from "react-router-dom";
 import FacetContainer from "../FacetContainer/FacetContainer";
 
-class SearchForm extends Component {
+export class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +19,6 @@ class SearchForm extends Component {
   };
 
   render() {
-    console.log('search', this.props);
     return (
       <section className="SearchForm">
         <p className="search-text">Please choose from one of these options:</p>
@@ -54,7 +48,7 @@ class SearchForm extends Component {
         </form>
         <Wall
           paintings={this.props.paintings}
-          handleFavorite={this.handleFavorite}
+          handleFavorite={this.props.handleFavorite}
           route="favorites"
         />
       </section>
@@ -62,19 +56,20 @@ class SearchForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   paintings: state.paintings,
   favorites: state.favorites
 });
 
-const mapDispatchToProps = dispatch => ({
-  establishPaintingsInRedux: paintings =>
-    dispatch(establishPaintingsInRedux(paintings)),
-  addFavoriteInRedux: favorite => dispatch(addFavoriteInRedux(favorite)),
-  deleteFavoriteInRedux: favorite => dispatch(deleteFavoriteInRedux(favorite))
-});
+export default connect(mapStateToProps)(SearchForm);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchForm);
+SearchForm.propTypes = {
+  addFavoriteInRedux: PropTypes.func,
+  deleteFavoriteInRedux: PropTypes.func,
+  establishFacetsInRedux: PropTypes.func,
+  establishPaintingsInRedux: PropTypes.func,
+  facets: PropTypes.object,
+  favorites: PropTypes.array,
+  paintings: PropTypes.array,
+  name: PropTypes.string
+};

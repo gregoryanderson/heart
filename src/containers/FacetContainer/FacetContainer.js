@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import "./FacetContainer.css";
 import PropTypes from "prop-types";
 import FacetBtn from "../FacetBtn/FacetBtn";
 
-const FacetContainer = props => {
+export const FacetContainer = props => {
   const buttons = props.facets.facets.map(facet => {
     return (
       <FacetBtn
         assignment={facet.key}
-        key={facet.value}
+        key={facet.value+facet.key}
         name={props.name}
         handleSearch={props.handleSearch}
       />
@@ -18,3 +18,9 @@ const FacetContainer = props => {
 };
 
 export default FacetContainer;
+
+FacetContainer.propTypes = {
+  facets: PropTypes.object,
+  name: PropTypes.string,
+  handleSearch: PropTypes.func
+};

@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import "./Wall.css";
 import PropTypes from "prop-types";
 import Piece from "../Piece/Piece";
 
 export const Wall = ({ handleFavorite, paintings, route }) => {
-  console.log(paintings)
   const pieces = paintings.map(painting => {
     return (
       <Piece
@@ -23,3 +22,9 @@ export const Wall = ({ handleFavorite, paintings, route }) => {
 };
 
 export default Wall;
+
+Wall.propTypes = {
+  route: PropTypes.string,
+  paintings: PropTypes.array,
+  handleFavorite: PropTypes.func
+};
