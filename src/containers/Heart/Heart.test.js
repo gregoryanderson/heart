@@ -135,12 +135,12 @@ describe("mapStateToProps", () => {
 describe("mapDispatchToProps", () => {
   it("should dispatch with paintings when establish paintings is called", () => {
     let mockPainting = {
-      paintings:[
+      paintings: [
         {
           name: "painting",
           id: 1
         }
-      ] ,
+      ],
       type: "ESTABLISH_PAINTINGS"
     };
     let mockDispatch = jest.fn();
@@ -154,10 +154,11 @@ describe("mapDispatchToProps", () => {
 
   it("should dispatch with facets when establish facets is called", () => {
     let mockFacet = {
-      facets:[{
-        0:{}
-      }
-      ] ,
+      facets: [
+        {
+          0: {}
+        }
+      ],
       type: "ESTABLISH_FACETS"
     };
     let mockDispatch = jest.fn();
@@ -171,13 +172,13 @@ describe("mapDispatchToProps", () => {
 
   it("should add favorite when add favorite is called", () => {
     let mockPainting = {
-      paintings:[
+      paintings: [
         {
           name: "painting",
           id: 1
         }
-      ] ,
-      type: 'ADD_FAVORITE'
+      ],
+      type: "ADD_FAVORITE"
     };
     let mockDispatch = jest.fn();
 
@@ -189,13 +190,13 @@ describe("mapDispatchToProps", () => {
   });
 
   let mockPainting = {
-    paintings:[
+    paintings: [
       {
         name: "painting",
         id: 1
       }
-    ] ,
-    type: 'DELETE_FAVORITE'
+    ],
+    type: "DELETE_FAVORITE"
   };
   let mockDispatch = jest.fn();
 

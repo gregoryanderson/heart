@@ -25,43 +25,43 @@ export const Nav = () => {
       </div>
       <p className="please-text">please search by...</p>
       <div className="search-links">
-        <p >
+        <p>
           <NavLink style={{ textDecoration: "none" }} to="/artist">
             Artist
           </NavLink>
         </p>
         <FaHeart />
-        <p >
+        <p>
           <NavLink style={{ textDecoration: "none" }} to="/color">
             Color
           </NavLink>
         </p>
         <FaHeart />
-        <p >
+        <p>
           <NavLink style={{ textDecoration: "none" }} to="/medium">
             Medium
           </NavLink>
         </p>
         <FaHeart />
-        <p >
+        <p>
           <NavLink style={{ textDecoration: "none" }} to="/century">
             Century
           </NavLink>
         </p>
         <FaHeart />
-        <p >
+        <p>
           <NavLink style={{ textDecoration: "none" }} to="/type">
             Type
           </NavLink>
         </p>
         <FaHeart />
-        <p >
+        <p>
           <NavLink style={{ textDecoration: "none" }} to="/place">
             Place
           </NavLink>
         </p>
         <FaHeart />
-        <p >
+        <p>
           <NavLink style={{ textDecoration: "none" }} to="/technique">
             Technique
           </NavLink>
@@ -81,4 +81,4 @@ Nav.propTypes = {
   facets: PropTypes.array,
   favorites: PropTypes.array,
   paintings: PropTypes.array
-  };
+};

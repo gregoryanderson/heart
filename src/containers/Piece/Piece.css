@@ -30,7 +30,7 @@
 }
 
 p {
-  margin: 0
+  margin: 0;
 }
 
 .Piece {
@@ -49,12 +49,13 @@ img {
   border: 1px solid black;
 }
 
-h3, h2 {
+h3,
+h2 {
   margin: 0;
 }
 
 .selected {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }

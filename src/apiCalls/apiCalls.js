@@ -110,23 +110,23 @@ export const cleanPaintingData = data => {
 };
 
 export const getFacetsFromApiCalls = data => {
-    const url =
-      "https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&ps=10";
-    return fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("There was an error curating your gallery");
-        }
-        return response.json();
-      })
-      .then(data => cleanFacetData(data));
-}
+  const url =
+    "https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&ps=10";
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("There was an error curating your gallery");
+      }
+      return response.json();
+    })
+    .then(data => cleanFacetData(data));
+};
 
-export const cleanFacetData= (data) => {
+export const cleanFacetData = data => {
   return data.facets.map(facet => {
     return {
       facets: facet.facets,
       name: facet.name
-    }
-  })
-}
+    };
+  });
+};

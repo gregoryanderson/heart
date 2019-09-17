@@ -8,21 +8,6 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./reducers";
-import firebase from 'firebase';
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyArcEP-92kE7JJPhqqp6KFqGHMtPHiMCJM",
-//   authDomain: "heart-b7be9.firebaseapp.com",
-//   databaseURL: "https://heart-b7be9.firebaseio.com",
-//   projectId: "heart-b7be9",
-//   storageBucket: "",
-//   messagingSenderId: "1094335058477",
-//   appId: "1:1094335058477:web:406d2a3365df664821dea4"
-// };
-// firebase.initializeApp(firebaseConfig)
-
-// const databaseRef = firebase.database().ref();
-// export const todosRef = databaseRef.child('users')
 
 const store = createStore(rootReducer, composeWithDevTools());
 

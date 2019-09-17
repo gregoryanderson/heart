@@ -39,8 +39,6 @@ export class Heart extends Component {
   async componentDidMount() {
     this.getUsers();
     usersRef.push().set({ id: "3", name: "marty" });
-    let potato = usersRef.push().set({ id: "5", name: "party" });
-    console.log(potato);
     localStorage.setItem("heartUser", JSON.stringify({ id: 5 }));
     try {
       const pieces = await getPaintingsFromApiCalls();
@@ -76,9 +74,9 @@ export class Heart extends Component {
       .ref()
       .on("value", snapshot => {
         const state = snapshot.val();
-        this.setState({users: state});
+        this.setState({ users: state });
       });
-    console.log('data retrieved');
+    console.log("data retrieved");
   };
 
   handleSearch = async (type, input) => {

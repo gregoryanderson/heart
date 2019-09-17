@@ -13,7 +13,7 @@ export const Piece = ({
   id,
   handleFavorite,
   title,
-  artist,
+  artist
 }) => {
   return (
     <div className="Piece">
@@ -44,7 +44,9 @@ export const Piece = ({
             onClick={() => handleFavorite(id)}
           />
           <div className="bottom-icons">
-            <p onClick={() => handleFavorite(id)}>{isFav ? <FaHeart /> : <FaRegHeart />}</p>
+            <p onClick={() => handleFavorite(id)}>
+              {isFav ? <FaHeart /> : <FaRegHeart />}
+            </p>
             <Link to={`/paintings/${id}`}>
               <h4>
                 <FaQuestion />
@@ -69,4 +71,4 @@ Piece.propTypes = {
   handleFavorite: PropTypes.func,
   title: PropTypes.string,
   artist: PropTypes.string
-}
+};
