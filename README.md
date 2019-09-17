@@ -9,7 +9,7 @@ Heart is an React/Redux app that uses the Rijksmuseum API to curate galleries fo
   1. Async Testing
   1. UX/UI
 
-
+![Screen Shot 2019-09-15 at 8 02 30 PM](https://user-images.githubusercontent.com/30326085/65010050-e563e280-d8cb-11e9-905a-682b0d1a62d0.png)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
