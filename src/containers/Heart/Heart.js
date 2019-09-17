@@ -15,7 +15,8 @@ import {
   establishPaintingsInRedux,
   addFavoriteInRedux,
   deleteFavoriteInRedux,
-  establishFacetsInRedux
+  establishFacetsInRedux,
+  addUser
 } from "../../actions";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -24,12 +25,23 @@ import Wall from "../Wall/Wall";
 import Nav from "../Nav/Nav";
 import Piece from "../Piece/Piece";
 import SearchForm from "../SearchForm/SearchForm";
-import Spinner from '../../Images/Spinner.svg'
+import Spinner from "../../Images/Spinner.svg";
+import { usersRef } from "../../config/firebase";
+import firebase from "firebase";
 
 export class Heart extends Component {
-
+  constructor() {
+    super();
+    this.state = {
+      users: ""
+    };
+  }
   async componentDidMount() {
-    this.getFromStorage()
+    this.getUsers();
+    usersRef.push().set({ id: "3", name: "marty" });
+    let potato = usersRef.push().set({ id: "5", name: "party" });
+    console.log(potato);
+    localStorage.setItem("heartUser", JSON.stringify({ id: 5 }));
     try {
       const pieces = await getPaintingsFromApiCalls();
       this.props.establishPaintingsInRedux(pieces);
@@ -43,7 +55,6 @@ export class Heart extends Component {
     } catch ({ message }) {
       this.setState({ error: message });
     }
-
   }
 
   handleFavorite = artId => {
@@ -57,19 +68,18 @@ export class Heart extends Component {
       foundPainting.isFav = !foundPainting.isFav;
       this.props.deleteFavoriteInRedux(foundPainting);
     }
-    this.saveToStorage(this.props.favorites)
   };
 
-  saveToStorage(favorites) {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }
-
-  getFromStorage() {
-    // console.log('in')
-    const oldFavs = JSON.parse(localStorage.getItem("favorites"));
-    // console.log('old', oldFavs)
-    this.saveToStorage(oldFavs);
-  }
+  getUsers = () => {
+    firebase
+      .database()
+      .ref()
+      .on("value", snapshot => {
+        const state = snapshot.val();
+        this.setState({users: state});
+      });
+    console.log('data retrieved');
+  };
 
   handleSearch = async (type, input) => {
     if (type === "color") {
@@ -109,7 +119,12 @@ export class Heart extends Component {
         <section>
           <Nav />
           {this.props.error && <p>{this.props.error}</p>}
-          {!this.props.facets.length && <div className="loading-div"><img src={Spinner} alt='Loading frame' className="loading"/><p>Please wait while we curate your gallery..</p></div>}
+          {!this.props.facets.length && (
+            <div className="loading-div">
+              <img src={Spinner} alt="Loading frame" className="loading" />
+              <p>Please wait while we curate your gallery..</p>
+            </div>
+          )}
           <Route
             exact
             path="/"
@@ -339,6 +354,7 @@ export const mapDispatchToProps = dispatch => ({
   establishFacetsInRedux: facets => dispatch(establishFacetsInRedux(facets)),
   addFavoriteInRedux: favorite => dispatch(addFavoriteInRedux(favorite)),
   deleteFavoriteInRedux: favorite => dispatch(deleteFavoriteInRedux(favorite))
+  // addUser: user => dispatch(addUser(user))
 });
 
 export default connect(
@@ -347,11 +363,11 @@ export default connect(
 )(Heart);
 
 Heart.propTypes = {
-addFavoriteInRedux: PropTypes.func,
-deleteFavoriteInRedux: PropTypes.func,
-establishFacetsInRedux: PropTypes.func,
-establishPaintingsInRedux: PropTypes.func,
-facets: PropTypes.array,
-favorites: PropTypes.array,
-paintings: PropTypes.array
+  addFavoriteInRedux: PropTypes.func,
+  deleteFavoriteInRedux: PropTypes.func,
+  establishFacetsInRedux: PropTypes.func,
+  establishPaintingsInRedux: PropTypes.func,
+  facets: PropTypes.array,
+  favorites: PropTypes.array,
+  paintings: PropTypes.array
 };
