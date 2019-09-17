@@ -1,3 +1,17 @@
+# Heart
+
+Heart is an React/Redux app that uses the Rijksmuseum API to curate galleries for users. A user can select to search from one of many options to view portraits that reflect that choice. Each search option has two potential search options- a simple input, or a button that displays options, for a greater UX/UI. The app is fully tested with the use of jest/enzyme. It also uses a Firebase database to store users. This is a solo project.
+
+## Learning Goals
+  
+  1. Redux
+  1. React
+  1. Async Testing
+  1. UX/UI
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
