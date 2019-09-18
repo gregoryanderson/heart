@@ -16,7 +16,8 @@ import {
   addFavoriteInRedux,
   deleteFavoriteInRedux,
   establishFacetsInRedux,
-  addUser
+  addUserInRedux,
+  addUsersToRedux
 } from "../../actions";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -28,18 +29,18 @@ import SearchForm from "../SearchForm/SearchForm";
 import Spinner from "../../Images/Spinner.svg";
 import { usersRef } from "../../config/firebase";
 import firebase from "firebase";
+import LoginForm from '../LoginForm/LoginForm'
 
 export class Heart extends Component {
   constructor() {
     super();
     this.state = {
-      users: ""
+      users: "", 
+      user: ''
     };
   }
   async componentDidMount() {
     this.getUsers();
-    usersRef.push().set({ id: "3", name: "marty" });
-    localStorage.setItem("heartUser", JSON.stringify({ id: 5 }));
     try {
       const pieces = await getPaintingsFromApiCalls();
       this.props.establishPaintingsInRedux(pieces);
@@ -74,10 +75,23 @@ export class Heart extends Component {
       .ref()
       .on("value", snapshot => {
         const state = snapshot.val();
-        this.setState({ users: state });
+        this.props.addUsersToRedux(state);
       });
-    console.log("data retrieved");
   };
+
+  checkUser = async (e, user) => {
+    e.preventDefault();
+    await this.props.addUserInRedux(user)
+    console.log('check', this.props.user)
+    let potato = Object.keys(this.props.users.users)
+    console.log('potato', potato)
+    let filteredKeys = potato.filter(key => {
+      this.props.users.users[key].name = this.props.user.name
+    })
+    console.log('filtered', filteredKeys)
+    console.log(this.props)
+    usersRef.push().set(user);
+  }
 
   handleSearch = async (type, input) => {
     if (type === "color") {
@@ -115,6 +129,7 @@ export class Heart extends Component {
     return (
       <main>
         <section>
+          <LoginForm checkUser={this.checkUser}/>
           <Nav />
           {this.props.error && <p>{this.props.error}</p>}
           {!this.props.facets.length && (
@@ -343,7 +358,9 @@ export class Heart extends Component {
 export const mapStateToProps = state => ({
   paintings: state.paintings,
   favorites: state.favorites,
-  facets: state.facets
+  facets: state.facets,
+  user: state.user,
+  users: state.users
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -351,8 +368,9 @@ export const mapDispatchToProps = dispatch => ({
     dispatch(establishPaintingsInRedux(paintings)),
   establishFacetsInRedux: facets => dispatch(establishFacetsInRedux(facets)),
   addFavoriteInRedux: favorite => dispatch(addFavoriteInRedux(favorite)),
-  deleteFavoriteInRedux: favorite => dispatch(deleteFavoriteInRedux(favorite))
-  // addUser: user => dispatch(addUser(user))
+  deleteFavoriteInRedux: favorite => dispatch(deleteFavoriteInRedux(favorite)),
+  addUserInRedux: user => dispatch(addUserInRedux(user)),
+  addUsersToRedux: users => dispatch(addUsersToRedux(users))
 });
 
 export default connect(

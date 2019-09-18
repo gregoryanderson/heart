@@ -17,3 +17,13 @@ export const establishFacetsInRedux = facets => ({
   type: "ESTABLISH_FACETS",
   facets
 });
+
+export const addUserInRedux = user => ({
+  type: 'ADD_USER',
+  user
+})
+
+export const addUsersToRedux = users => ({
+  type: 'ADD_USERS',
+  users
+})
