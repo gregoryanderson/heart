@@ -59,3 +59,8 @@ h2 {
   justify-content: space-between;
   margin-bottom: 10px;
 }
+
+.question {
+  text-decoration: none;
+  color: black;
+}

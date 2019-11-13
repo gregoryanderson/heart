@@ -1,5 +1,5 @@
 main {
-  background-image: linear-gradient(#aaa, #eee);
+  background-image: linear-gradient(#ede7f6,#e8eaf6);
 }
 
 .loading {
@@ -10,4 +10,14 @@ main {
 .loading-div {
   text-align: center;
   padding-bottom: 500px;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  width: 300px;
+  background-color: pink;
+  margin: auto;
+  margin-top: 50px
 }

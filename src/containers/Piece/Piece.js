@@ -5,7 +5,7 @@ import { FaHeart, FaRegHeart, FaQuestion, FaChevronLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export const Piece = ({
-  isFav,
+  isfav,
   url,
   width,
   key,
@@ -35,22 +35,20 @@ export const Piece = ({
             </section>
           </section>
           <img
-            className={isFav ? "favorite" : "notFavorite"}
+            className={isfav ? "favorite" : "notFavorite"}
             src={url}
             width={width}
             key={key}
             alt={alt}
-            isFav={isFav}
+            isfav={isfav}
             onClick={() => handleFavorite(id)}
           />
           <div className="bottom-icons">
             <p onClick={() => handleFavorite(id)}>
-              {isFav ? <FaHeart /> : <FaRegHeart />}
+              {isfav ? <FaHeart /> : <FaRegHeart />}
             </p>
-            <Link to={`/paintings/${id}`}>
-              <h4>
-                <FaQuestion />
-              </h4>
+            <Link className="question" to={`/paintings/${id}`}>
+              <FaQuestion />
             </Link>
           </div>
         </section>
@@ -62,7 +60,7 @@ export const Piece = ({
 export default Piece;
 
 Piece.propTypes = {
-  isFav: PropTypes.bool,
+  isfav: PropTypes.bool,
   url: PropTypes.string,
   width: PropTypes.string,
   key: PropTypes.string,

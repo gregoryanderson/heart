@@ -29,14 +29,17 @@ import SearchForm from "../SearchForm/SearchForm";
 import Spinner from "../../Images/Spinner.svg";
 import { usersRef } from "../../config/firebase";
 import firebase from "firebase";
-import LoginForm from '../LoginForm/LoginForm'
+import LoginForm from "../LoginForm/LoginForm";
+import ReactModal from "react-modal";
 
 export class Heart extends Component {
   constructor() {
     super();
     this.state = {
-      users: "", 
-      user: ''
+      users: "",
+      user: "",
+      error: "",
+      showModal: true
     };
   }
   async componentDidMount() {
@@ -60,11 +63,11 @@ export class Heart extends Component {
     const foundPainting = this.props.paintings.find(painting => {
       return painting.id === artId;
     });
-    if (!foundPainting.isFav) {
-      foundPainting.isFav = !foundPainting.isFav;
+    if (!foundPainting.isfav) {
+      foundPainting.isfav = !foundPainting.isfav;
       this.props.addFavoriteInRedux(foundPainting);
     } else {
-      foundPainting.isFav = !foundPainting.isFav;
+      foundPainting.isfav = !foundPainting.isfav;
       this.props.deleteFavoriteInRedux(foundPainting);
     }
   };
@@ -81,47 +84,74 @@ export class Heart extends Component {
 
   checkUser = async (e, user) => {
     e.preventDefault();
-    await this.props.addUserInRedux(user)
-    console.log('check', this.props.user)
-    let potato = Object.keys(this.props.users.users)
-    console.log('potato', potato)
-    let filteredKeys = potato.filter(key => {
-      this.props.users.users[key].name = this.props.user.name
-    })
-    console.log('filtered', filteredKeys)
-    console.log(this.props)
-    usersRef.push().set(user);
-  }
+    await this.props.addUserInRedux(user);
+    let userIds = Object.keys(this.props.users.users);
+    let filteredKeys = userIds.filter(key => {
+      if (this.props.users.users[key].name === this.props.user.name) {
+        return key;
+      }
+    });
+    console.log("filteredkeys", filteredKeys);
+    if (filteredKeys.length) {
+      console.log("this name exists");
+      this.setState({
+        error: "This name is already chosen, please choose another"
+      });
+    } else {
+      console.log("push to firebase");
+      usersRef.push().set(user);
+      this.setState({ showModal: false });
+      this.setState({ error: "" });
+    }
+  };
 
   handleSearch = async (type, input) => {
+    this.props.establishFacetsInRedux([]);
     if (type === "color") {
       if (input.includes("#")) {
         input = input.replace(/\s*#/g, "");
         console.log(input);
         const pieces = await getSearchedForPaintingsByColor(input);
         this.props.establishPaintingsInRedux(pieces);
+        const facets = await getFacetsFromApiCalls();
+        this.props.establishFacetsInRedux(facets);
       } else {
         const pieces = await getSearchedForPaintingsByColor(input);
         this.props.establishPaintingsInRedux(pieces);
+        const facets = await getFacetsFromApiCalls();
+        this.props.establishFacetsInRedux(facets);
       }
     } else if (type === "medium") {
       const pieces = await getSearchedForPaintingsByMedium(input);
       this.props.establishPaintingsInRedux(pieces);
+      const facets = await getFacetsFromApiCalls();
+      this.props.establishFacetsInRedux(facets);
     } else if (type === "century") {
       const pieces = await getSearchedForPaintingsByCentury(input);
       this.props.establishPaintingsInRedux(pieces);
+      const facets = await getFacetsFromApiCalls();
+      console.log('facet', facets)
+      this.props.establishFacetsInRedux(facets);
     } else if (type === "type") {
       const pieces = await getSearchedForPaintingsByType(input);
       this.props.establishPaintingsInRedux(pieces);
+      const facets = await getFacetsFromApiCalls();
+      this.props.establishFacetsInRedux(facets);
     } else if (type === "place") {
       const pieces = await getSearchedForPaintingsByPlace(input);
       this.props.establishPaintingsInRedux(pieces);
+      const facets = await getFacetsFromApiCalls();
+      this.props.establishFacetsInRedux(facets);
     } else if (type === "technique") {
       const pieces = await getSearchedForPaintingsByTechnique(input);
       this.props.establishPaintingsInRedux(pieces);
+      const facets = await getFacetsFromApiCalls();
+      this.props.establishFacetsInRedux(facets);
     } else {
       const pieces = await getSearchForPaintingsByArtist(input);
       this.props.establishPaintingsInRedux(pieces);
+      const facets = await getFacetsFromApiCalls();
+      this.props.establishFacetsInRedux(facets);
     }
   };
 
@@ -129,9 +159,12 @@ export class Heart extends Component {
     return (
       <main>
         <section>
-          <LoginForm checkUser={this.checkUser}/>
+          {/* <ReactModal isOpen={this.state.showModal} className="modal">
+            <LoginForm checkUser={this.checkUser}/>
+            {this.state.error && <p>{this.state.error}</p>}
+          </ReactModal> */}
           <Nav />
-          {this.props.error && <p>{this.props.error}</p>}
+          {this.state.error && <p>{this.state.error}</p>}
           {!this.props.facets.length && (
             <div className="loading-div">
               <img src={Spinner} alt="Loading frame" className="loading" />
@@ -339,9 +372,9 @@ export class Heart extends Component {
                   url={foundPainting.url}
                   key={foundPainting.id}
                   id={foundPainting.id}
-                  width="1000"
+                  width="900"
                   alt={foundPainting.title}
-                  isFav={foundPainting.isFav}
+                  isfav={foundPainting.isfav}
                   handleFavorite={this.handleFavorite}
                   title={foundPainting.title}
                   artist={foundPainting.artist}

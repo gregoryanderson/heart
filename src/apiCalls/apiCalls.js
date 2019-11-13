@@ -1,11 +1,12 @@
 export const getPaintingsFromApiCalls = () => {
   const url =
-    "https://www.rijksmuseum.nl/api/en/collection?key=ig4dIzOQ&format=json&q=van gogh&imgonly=true";
+    "https://www.rijksmuseum.nl/api/nl/collection?key=ig4dIzOQ&format=json&type=schilderij&f.normalized32Colors.hex=%20%23367614";
   return fetch(url)
     .then(response => {
       if (!response.ok) {
         throw new Error("There was an error curating your gallery");
       }
+      
       return response.json();
     })
     .then(data => cleanPaintingData(data));
@@ -104,7 +105,8 @@ export const cleanPaintingData = data => {
       width: painting.webImage.width,
       height: painting.webImage.height,
       url: painting.webImage.url,
-      isFav: false
+      key: painting.id, 
+      isfav: false
     };
   });
 };

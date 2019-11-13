@@ -11,61 +11,49 @@ export const Nav = () => {
         he<span className="nav--art">Art</span>
       </h1>
       <div className="top-section">
-        <p className="link">
-          <NavLink style={{ textDecoration: "none" }} to="/">
-            Home
-          </NavLink>
-        </p>
+        <NavLink className="link" to="/">
+          Home
+        </NavLink>
         <FaHeart />
-        <p className="link">
-          <NavLink style={{ textDecoration: "none" }} to="/favorites">
-            heArts
-          </NavLink>
-        </p>
+        <NavLink className="link" to="/favorites">
+          heArts
+        </NavLink>
       </div>
       <p className="please-text">please search by...</p>
       <div className="search-links">
-        <p>
-          <NavLink style={{ textDecoration: "none" }} to="/artist">
-            Artist
-          </NavLink>
-        </p>
-        <FaHeart />
-        <p>
-          <NavLink style={{ textDecoration: "none" }} to="/color">
-            Color
-          </NavLink>
-        </p>
-        <FaHeart />
-        <p>
-          <NavLink style={{ textDecoration: "none" }} to="/medium">
-            Medium
-          </NavLink>
-        </p>
-        <FaHeart />
-        <p>
-          <NavLink style={{ textDecoration: "none" }} to="/century">
-            Century
-          </NavLink>
-        </p>
-        <FaHeart />
-        <p>
-          <NavLink style={{ textDecoration: "none" }} to="/type">
-            Type
-          </NavLink>
-        </p>
-        <FaHeart />
-        <p>
-          <NavLink style={{ textDecoration: "none" }} to="/place">
-            Place
-          </NavLink>
-        </p>
-        <FaHeart />
-        <p>
-          <NavLink style={{ textDecoration: "none" }} to="/technique">
-            Technique
-          </NavLink>
-        </p>
+        <NavLink className="link" to="/artist">
+          Artist
+        </NavLink>
+        <FaHeart className="heart-icon"/>
+
+        <NavLink className="link" to="/color">
+          Color
+        </NavLink>
+        <FaHeart className="heart-icon"/>
+
+        <NavLink className="link" to="/medium">
+          Medium
+        </NavLink>
+        <FaHeart className="heart-icon"/>
+
+        <NavLink className="link" to="/century">
+          Century
+        </NavLink>
+        <FaHeart className="heart-icon"/>
+
+        <NavLink className="link" to="/type">
+          Type
+        </NavLink>
+        <FaHeart className="heart-icon"/>
+
+        <NavLink className="link" to="/place">
+          Place
+        </NavLink>
+        <FaHeart className="heart-icon"/>
+
+        <NavLink className="link" to="/technique">
+          Technique
+        </NavLink>
       </div>
     </section>
   );

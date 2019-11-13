@@ -31,3 +31,4 @@ describe("favorites", () => {
     expect(result).toEqual(expected);
   });
 });
+ 

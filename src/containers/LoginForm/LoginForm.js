@@ -20,8 +20,8 @@ export class LoginForm extends Component {
   render() {
     return (
     <form>
-        <input type='text' placeholder='Please enter your name' name='name' value={this.state.name} onChange={e => this.handleChangeOfInput(e)}/>
-        <input type='text' placeholder='Please enter your password' name='password' value={this.state.password} onChange={e => this.handleChangeOfInput(e)}/>
+        <input className="form-input" type='text' placeholder='Please enter your name' name='name' value={this.state.name} onChange={e => this.handleChangeOfInput(e)}/>
+        <input className="form-input" type='text' placeholder='Please enter your password' name='password' value={this.state.password} onChange={e => this.handleChangeOfInput(e)}/>
         <button onClick={(e) => this.props.checkUser(e, this.state)}>Submit!</button>
     </form>
     );

@@ -1,6 +1,6 @@
 .Nav {
   text-align: center;
-  margin: 0 250px;
+  margin: 0 175px;
 }
 
 .logo {
@@ -23,12 +23,18 @@
 
 .link {
   margin: 0px 20px;
+  text-decoration: none;
+  color: black
 }
 
 .nav--art {
-  color: #660000;
+  color: #b71c1c;
 }
 
 .please-text {
   margin-bottom: 10px;
+}
+
+.heart-icon {
+  width: 20px;
 }
