@@ -27,7 +27,6 @@ import Nav from "../Nav/Nav";
 import Piece from "../Piece/Piece";
 import SearchForm from "../SearchForm/SearchForm";
 import Spinner from "../../Images/Spinner.svg";
-import { usersRef } from "../../config/firebase";
 import firebase from "firebase";
 import LoginForm from "../LoginForm/LoginForm";
 import ReactModal from "react-modal";
@@ -43,7 +42,6 @@ export class Heart extends Component {
     };
   }
   async componentDidMount() {
-    this.getUsers();
     try {
       const pieces = await getPaintingsFromApiCalls();
       this.props.establishPaintingsInRedux(pieces);
@@ -69,39 +67,6 @@ export class Heart extends Component {
     } else {
       foundPainting.isfav = !foundPainting.isfav;
       this.props.deleteFavoriteInRedux(foundPainting);
-    }
-  };
-
-  getUsers = () => {
-    firebase
-      .database()
-      .ref()
-      .on("value", snapshot => {
-        const state = snapshot.val();
-        this.props.addUsersToRedux(state);
-      });
-  };
-
-  checkUser = async (e, user) => {
-    e.preventDefault();
-    await this.props.addUserInRedux(user);
-    let userIds = Object.keys(this.props.users.users);
-    let filteredKeys = userIds.filter(key => {
-      if (this.props.users.users[key].name === this.props.user.name) {
-        return key;
-      }
-    });
-    console.log("filteredkeys", filteredKeys);
-    if (filteredKeys.length) {
-      console.log("this name exists");
-      this.setState({
-        error: "This name is already chosen, please choose another"
-      });
-    } else {
-      console.log("push to firebase");
-      usersRef.push().set(user);
-      this.setState({ showModal: false });
-      this.setState({ error: "" });
     }
   };
 
@@ -159,10 +124,6 @@ export class Heart extends Component {
     return (
       <main>
         <section>
-          <ReactModal isOpen={this.state.showModal} className="modal">
-            <LoginForm checkUser={this.checkUser}/>
-            {this.state.error && <p>{this.state.error}</p>}
-          </ReactModal>
           <Nav />
           {this.state.error && <p>{this.state.error}</p>}
           {!this.props.facets.length && (
