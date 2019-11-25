@@ -159,10 +159,10 @@ export class Heart extends Component {
     return (
       <main>
         <section>
-          {/* <ReactModal isOpen={this.state.showModal} className="modal">
+          <ReactModal isOpen={this.state.showModal} className="modal">
             <LoginForm checkUser={this.checkUser}/>
             {this.state.error && <p>{this.state.error}</p>}
-          </ReactModal> */}
+          </ReactModal>
           <Nav />
           {this.state.error && <p>{this.state.error}</p>}
           {!this.props.facets.length && (
